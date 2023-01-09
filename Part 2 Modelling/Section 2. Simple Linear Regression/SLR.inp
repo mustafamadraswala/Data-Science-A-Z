@@ -1,0 +1,11 @@
+# Log started 2023-01-07 15:00
+# Record of session commands.  Please note that this will
+# likely require editing if it is to be run as a script.
+open \
+  "D:\Mustafa2k21\Work2k21\Data Science A-Z\Part 2 Modelling\Section 2. Simple Linear Regression\P12-SalaryData.csv"
+summary YearsExperience Salary
+summary YearsExperience Salary --simple
+# model 1
+ols Salary 0 YearsExperience
+fcast 1 30
+fcast 1 30

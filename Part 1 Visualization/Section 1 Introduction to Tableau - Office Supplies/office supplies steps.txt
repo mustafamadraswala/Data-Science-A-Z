@@ -1,0 +1,170 @@
+Notepad - 
+OfficeSupplies.csv
+Person who made the most sales in a single region.
+Total 3 regions = 3 Bonuses
+
+-----------------
+Open Tableau
+1 . Import Data Source
+- Connect - And import excel file --> Sheet 1
+
+Dimensions - Categorical data
+Measures-  Numerical data
+
+Add - region and unit fields and explore a bit
+
+-----------------
+Creating a calculated field
+Question - What each representative sold -
+Answer - Use the rep and item fields to plot the graph for overall item
+	 Use the rep, item and units field to plot the graph for each individual item
+
+Break it down by Region - Add the region field in columns with rep
+			  Add the the units in rows
+But this is for number of items sold
+
+We want to see the amount in dollars of items sold by each rep
+- So multiply number of units sold by unit price
+eg - 42 units x 4990 each
+
+Right click on measures --> Create calculated field --> Total Sales --> Units * Unit Price
+--> 2 Columns -- Rep, Region --> 1 row --> Total Sales
+--> Click on column to order by descending order
+And the answer is Matthew  Susan  James for Central East West repectively
+
+-----------------------
+Adding Colors
+is automatic but if not - Press ctrl and drag Rep column over the color section
+Better way - Use the sum of Total Sales Column instead or 
+The best is to use Region Column Instead
+
+-----------------------
+Adding labels and formatting
+To add a label - Drag the sum of Total sales column and put it on the labels section
+
+Right click on sum(Total Sales) --> Format --> Pane --> Change numbers to Currency
+
+Format axis -
+Right click on axis --> Format --> Axis --> Font = 12
+
+
+-----------------------
+
+Part 2 - 
+Data mining in Tableau
+
+- Duplicate Row Number column
+	Rename --> Number of Records
+	Click --> Change Measure(sum) to Measure(count)
+	Add it to the row 
+
+1 - Connect Churn modelling excel file --> add data source
+
+2 - Turn the Geography text field to Location field
+- Right click --> Duplicate column --> Right Click --> Geographic role --> country/Region
+- latitude and logitude will also be created
+- Now drag on the screen to visualize it as a map
+- Drag the Number of records field on the color section
+- Drag the Number of records field on the label section
+- If needed, - Drag the Geography(abc) field on the label section
+- Right click on Lbael Section --> Font --> 12
+
+------------
+Run A/B test in Tableau - If we take all features in the dataaset against Exited 0 or 1, So who is more likely to exit, Male or Female?
+
+Dependent variable - Exited -- 0 or 1
+- Create new workbook - Use same dataset
+- Drag Exited from Measures to Dimensions section
+- Drag Exited on color section - Gender to Columns - Num of Records to Rows
+- Change num of records to % - 
+    Click on sum of records - Add/Edit table calculation - Percent of Total - Table Down
+    Format --> Number --> PErcent --> 0 decimal
+    Drag the new sum of records on rows to replace old one
+
+Hence - Female are more likely to exit
+
+------------
+Working with Aliases
+- Right click - format - change font size and bold all
+- Right click on Exited - Alisaes - 0 = Stayed - 1 = Exited
+- Drag the new Exited column on Label section
+- Drag the new Exited column above the old one on - right side 2nd tab
+Format - Stayed
+	  75%
+------------
+Adding a reference line
+- Compare our results to a benchmark
+- Create new sheet --> Remove the gender column to get churn % of all Employees
+
+Q - add a reference line to check overall exit rate vs male and Female
+A - Right click on axis - % total num of records - Add a reference line
+- Line - Entire table - Contsant - 0.20 - Label = None - Formatting = Line - Ok
+
+------------
+Looking for anamolies
+Add feature from measure to dimensions and then drag on column section
+
+- Now also you can drag any column on Gender column - eg - Geography- We can see that Germany has a higher churn rate - 
+So that is an anamoly
+
+- So now duplicate sheet again and add different dimensions on top of the column - Gender/ Geography eg - Has Cr card
+
+- New sheet --> Is Active Member
+- New sheet --> Num of Product - A massive anamoly
+So check the actual number of people
+- Add row number on Label Section and Remove the current one
+So it still does not make a difference
+
+--------------------------------------------------
+
+For validation
+We create a new calculated field where we take the last digit of the customer ID to check or validate uniformity.
+
+Add image
+
+So the idea here is to find a variable that you know for sure does not affect your end result. So something that is definitely not a important variable in the choice of customers to stay if the bank or exit the bank and a good variable here would be a number.
+So like a digit one digit number. So if say the customer My favorite is if the customers have mobile phones and the data and you can just take say the last digit of the mobile phone or in this case we have customer I.D. So let's take the last digit of the customer I.D. as you can imagine it has nothing to do with whether or not the customer of the bank it's not a predictor.
+It has to be all of the last digit have to have the same possibility of leaving.
+And we did get the correct result.
+
+
+
+--------------------------------------------------
+Section 3 - 
+Advance data mining with Tableau
+Dataset - BankChurnModelling.xlxs
+Chi-Squared template
+
+- Duplicate Row Number column
+	Rename --> Number of Records
+	Click --> Change Measure(sum) to Measure(count)
+	Add it to the row 
+- Add Age to Column
+
+So the issue is that if someone is 29 and half years old will not show porperly
+
+So option is to create bins
+To convert numerical variable to categorical variable
+
+To create bins that is 
+What I want to do is I want to group people into bands. 
+So I want to group people into for instance 5 year bands anybody between 20 and 25 will go into one group of 25 to 30 will go to the next group and so on.
+Right click on Age as a measure and create a bin-->Size of bins = 5 and a Age(bin) dimension will be created. And then drag Age(bin) in place of age in columns.
+
+15-19,20-24 and so on bands or groups are created.
+Drag sum of records + ctrl onto label and color to make it look more appealing.
+Also to remove quick percentage as we did before right click on sum of records-->quick calculation-->percent of total.
+Right skewed as the tail is going to the right.
+
+To make it percentage - Right click on (T)number of records --> Quick Calculation --> Percent of Total
+
+
+Test and age distribution
+So here we can see which are the exact age groups who exited and stayed. So we can find a clear consensus of it. 
+The only problematic issue or anamoly we can find is that the age group of 75,85 and 90 in which no one left the bank so we will see further how to integrate the test and age distributions together to resolve that.
+
+--------------------------------------
+This below is an AB or a classification test just like we created before.
+And the other chart above Tells us the distribution of age overall.
+
+Add image

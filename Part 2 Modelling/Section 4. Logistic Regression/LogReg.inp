@@ -1,0 +1,27 @@
+# Log started 2023-01-08 12:39
+# Record of session commands.  Please note that this will
+# likely require editing if it is to be run as a script.
+open \
+  "D:\Mustafa2k21\Work2k21\Data Science A-Z\Part 2 Modelling\Section 4. Logistic Regression\P12-Email-Offer.csv"
+gnuplot  TookAction Age
+dummify Gender
+rename 5 Male
+rename 4 Female
+# model 1
+logit TookAction 0 Age Male
+# model 2
+logit TookAction 0 Age Male Female
+# model 3
+logit TookAction 0 Age
+# model 4
+logit TookAction 0 Age Male
+fcast 1 100
+# model 4
+fcast 1 100 TookAction_hat
+fcast 1 100
+setinfo TookAction_hat \
+  --description="forecast of TookAction -Features age/Male -Analysis--Forecasts--Ok--Press +"
+# model 5
+logit TookAction 0 Age Female --p-values
+# model 6
+logit TookAction 0 Age Male --p-values
